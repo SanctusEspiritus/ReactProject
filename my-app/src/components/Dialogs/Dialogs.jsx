@@ -2,25 +2,22 @@ import s from './Dialogs.module.css';
 import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import React from 'react';
-import {updateNewPostTextActionCreator} from '../../redux/profile-reducer';
-import {sendMessageCreator} from '../../redux/dialogs-reducer';
 
 const Dialogs = (props) => {
 
-    let dialogs = props.state.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />);
-    let messages = props.state.messagesData.map(message => <Message message={message.message} />);
-    let dialogText = props.state.dialogText;
+    let dialogs = props.dialogsPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />);
+    let messages = props.dialogsPage.messagesData.map(message => <Message message={message.message} />);
+    let dialogText = props.dialogsPage.dialogText;
     
     let refferenseDialog = React.createRef();
 
     let onSendMessageClick = () => {
-        props.dispatch(sendMessageCreator());
+        props.sendMessage();
     }
 
     let changeDialogText = () => {
         let text = refferenseDialog.current.value;
-        let objAction = updateNewPostTextActionCreator(text, true);
-        props.dispatch(objAction);
+        props.changeDialogText(text, true);
     }
 
     return (
