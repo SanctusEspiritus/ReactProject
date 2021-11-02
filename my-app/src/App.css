@@ -1,0 +1,20 @@
+body {
+    background-image: url(../src/img/background_space.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.app-wrapper {
+    opacity: 0.8;
+    display: grid;
+    width: 1200px;
+    margin: 0 auto;
+    grid-template-areas: "header header" "cont nav";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 10fr 2fr;
+}
+
+.app-wrapper-content {
+    grid-area: cont;
+    background-color: brown;
+}
