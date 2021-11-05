@@ -3,30 +3,26 @@ import React from 'react';
 import { updateNewPostTextActionCreator } from '../../redux/profile-reducer';
 import { sendMessageCreator } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
-import StoreContext from '../../StoreContext';
+import { connect } from 'react-redux';
 
-const DialogsContainer = (props) => {
-
-    return (
-        <StoreContext.Consumer>
-            {store => {
-                let dialogsPage = store.getState().dialogsPage;
-
-                let onSendMessageClick = () => {
-                    store.dispatch(sendMessageCreator());
-                }
-
-                let changeDialogText = (text, isDialog) => {
-                    let objAction = updateNewPostTextActionCreator(text, isDialog);
-                    store.dispatch(objAction);
-                }
-                return <Dialogs sendMessage={onSendMessageClick}
-                    changeDialogText={changeDialogText}
-                    dialogsPage={dialogsPage} />
-            }
-            }
-        </StoreContext.Consumer>
-    )
+let mapStateToProps = (state) => {
+    return {
+        dialogsPage: state.dialogsPage
+    }
 }
+
+let mapDispatchToProps = (dispatch) => {
+    return {
+        sendMessage: () => {
+            dispatch(sendMessageCreator());
+        },
+        changeDialogText: (text, isDialog) => {
+            let objAction = updateNewPostTextActionCreator(text, isDialog);
+            dispatch(objAction);
+        }
+    }
+}
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 export default DialogsContainer;

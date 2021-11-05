@@ -11,20 +11,21 @@ let initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
-            let objMessage = {
-                id: 6,
-                message: state.newPostText,
-                likesCount: 0
-            }
-            state.postData.push(objMessage);
-            state.newPostText = '';
-            return state;
-        case CHANGE_POST:
+        case CHANGE_POST: {
+            let copyState = { ...state };
             if (!action.thisIsDialog) {
-                state.newPostText = action.textPost;
+                copyState.newPostText = action.textPost;
             }
-            return state;
+            return copyState;
+        }
+        case ADD_POST: {
+            let newPostText = state.newPostText;
+            return {
+                ...state,
+                postData: [...state.postData, {id: 6,message: newPostText,likesCount: 0}],
+                newPostText: ''
+            }
+        }
         default:
             return state;
     }
