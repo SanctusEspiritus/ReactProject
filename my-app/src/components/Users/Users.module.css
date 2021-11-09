@@ -2,3 +2,15 @@
     width: 200px;
     height: 200px;
 }
+.pageNumber{
+    padding: 0 4px;
+    display: inline-block;
+}
+.blockPaginations {
+    max-width: 1200px;
+}
+.activeNumber{
+    font-weight: bold;
+    color: cyan;
+    padding: 0 4px;
+}
