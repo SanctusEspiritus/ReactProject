@@ -1,12 +1,14 @@
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST = 'CHANGE-POST';
+const SET_PROFILE = 'SET_PROFILE';
 
 let initialState = {
     postData: [
         { id: 1, message: "Who cares, if you exist?", likesCount: 15 },
         { id: 2, message: "You came all this way just for that", likesCount: 1 }
     ],
-    newPostText: 'Universe'
+    newPostText: 'Universe',
+    profile: null
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -26,12 +28,16 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: ''
             }
         }
+        case SET_PROFILE: {
+            return { ...state, profile: action.profile}
+        }
         default:
             return state;
     }
 }
 
 export const addPostActionCreator = () => ({ type: ADD_POST })
+export const setUserProfile = (profile) => ({type: SET_PROFILE, profile})
 export const updateNewPostTextActionCreator = (text, thisIsDialog) =>
     ({ type: CHANGE_POST, textPost: text, thisIsDialog: thisIsDialog })
 

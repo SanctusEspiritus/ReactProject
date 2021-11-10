@@ -5,7 +5,7 @@ import usersReducer from "./users-reducer";
 
 let reducers = combineReducers({
     dialogsPage: dialogsReducer,
-    messagesPage: profileReducer,
+    profilePage: profileReducer,
     usersPage: usersReducer
 });
 

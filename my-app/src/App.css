@@ -16,5 +16,5 @@ body {
 
 .app-wrapper-content {
     grid-area: cont;
-    background-color: brown;
+    background-color: white;
 }
