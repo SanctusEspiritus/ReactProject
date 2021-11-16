@@ -16,21 +16,28 @@ export const usersAPI = {
     },
     deleteUser(id = 1) {
         return instance.delete(`follow/${id}`)
-        .then(response => {
-            return response.data;     
-        });
+            .then(response => {
+                return response.data;
+            });
     },
     followUser(id = 1) {
         return instance.post(`follow/${id}`)
-        .then(response => {
-            return response.data;      
-        }); 
+            .then(response => {
+                return response.data;
+            });
     }
 }
 
 export const headerAPI = {
     getProfile() {
         return instance.get(`auth/me`)
+            .then(response => { return response.data; });
+    }
+}
+
+export const userProfile = {
+    getUserProfile(userId) {
+        return instance.get(`profile/${userId}`)
             .then(response => { return response.data; });
     }
 }
