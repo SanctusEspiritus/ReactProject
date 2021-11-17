@@ -1,6 +1,7 @@
 import React from 'react';
 import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
 
@@ -19,6 +20,7 @@ const ProfileInfo = (props) => {
             <div>
                 <p>Подписывайтесь на мой инстаграмм - {props.profile.contacts.instagram}</p>
             </div>
+            <ProfileStatus status={"runnaway"}/>
         </div>
     </div>);
 }
