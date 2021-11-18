@@ -3,6 +3,7 @@ import { userProfile } from "../API/api";
 const ADD_POST = 'ADD-POST';
 const CHANGE_POST = 'CHANGE-POST';
 const SET_PROFILE = 'SET_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 let initialState = {
     postData: [
@@ -10,7 +11,8 @@ let initialState = {
         { id: 2, message: "You came all this way just for that", likesCount: 1 }
     ],
     newPostText: 'Universe',
-    profile: null
+    profile: null,
+    status: ''
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -33,6 +35,9 @@ const profileReducer = (state = initialState, action) => {
         case SET_PROFILE: {
             return { ...state, profile: action.profile }
         }
+        case SET_STATUS: {
+            return { ...state, status: action.status}
+        }
         default:
             return state;
     }
@@ -40,14 +45,32 @@ const profileReducer = (state = initialState, action) => {
 
 export const addPostActionCreator = () => ({ type: ADD_POST })
 export const setUserProfile = (profile) => ({ type: SET_PROFILE, profile })
+export const setStatus = (status) => ({ type: SET_STATUS, status })
 export const updateNewPostTextActionCreator = (text, thisIsDialog) =>
     ({ type: CHANGE_POST, textPost: text, thisIsDialog: thisIsDialog })
 
 export const getUserProfile = (userId) => {
     return (dispatch) => {
-        if (!userId) userId = 3;
+        if (!userId) userId = 20687;
         userProfile.getUserProfile(userId).then(data => {
             dispatch(setUserProfile(data));
+        });
+    }
+}
+
+export const setUserStatus = (status) => {
+    return (dispatch) => {
+        userProfile.setStatus(status).then(data => {
+            if (data.resultCode === 0) dispatch(setStatus(status));
+        });
+    }
+}
+
+export const getUserStatus = (userId) => {
+    return (dispatch) => {
+        if (!userId) userId = 20687;
+        userProfile.getStatus(userId).then(data => {
+            dispatch(setStatus(data));
         });
     }
 }

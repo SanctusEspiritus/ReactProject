@@ -20,7 +20,7 @@ const ProfileInfo = (props) => {
             <div>
                 <p>Подписывайтесь на мой инстаграмм - {props.profile.contacts.instagram}</p>
             </div>
-            <ProfileStatus status={"runnaway"}/>
+            <ProfileStatus status={props.status} setUserStatus={props.setUserStatus}/>
         </div>
     </div>);
 }
