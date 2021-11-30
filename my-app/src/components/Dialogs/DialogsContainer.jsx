@@ -1,6 +1,5 @@
 import s from './Dialogs.module.css';
 import React from 'react';
-import { updateNewPostTextActionCreator } from '../../redux/profile-reducer';
 import { sendMessageCreator } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
@@ -15,13 +14,9 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        sendMessage: () => {
-            dispatch(sendMessageCreator());
+        sendMessage: (newMessage) => {
+            dispatch(sendMessageCreator(newMessage));
         },
-        changeDialogText: (text, isDialog) => {
-            let objAction = updateNewPostTextActionCreator(text, isDialog);
-            dispatch(objAction);
-        }
     }
 }
 

@@ -1,6 +1,4 @@
-const CHANGE_POST = 'CHANGE-POST';
 const SEND_MESSAGE = 'SEND-MESSAGE';
-
 
 let initialState = {
     dialogsData: [
@@ -16,25 +14,15 @@ let initialState = {
         { id: 1, message: "Well well well" },
         { id: 2, message: "for long time ago" },
         { id: 3, message: "so breathe!" }
-    ],
-    dialogText: 'Hey, you take more power?'
+    ]
 };
 
 const dialogsReducer = (state = initialState, action) => {
     switch (action.type) {
-        case CHANGE_POST: {
-            let copyState = { ...state };
-            if (action.thisIsDialog) {
-                copyState.dialogText = action.textPost;
-            }
-            return copyState;
-        }
         case SEND_MESSAGE: {
-            let dialogText = state.dialogText;
             return {
                 ...state,
-                messagesData: [...state.messagesData, { id: 6, message: dialogText }],
-                dialogText: ''
+                messagesData: [...state.messagesData, { id: 6, message: action.message }]
             }
         }
         default:
@@ -42,6 +30,6 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const sendMessageCreator = () => ({ type: SEND_MESSAGE })
+export const sendMessageCreator = (message) => ({ type: SEND_MESSAGE, message })
 
 export default dialogsReducer;
