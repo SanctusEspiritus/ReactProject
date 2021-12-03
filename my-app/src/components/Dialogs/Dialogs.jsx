@@ -3,7 +3,10 @@ import DialogItem from './DialogItem/DialogItem';
 import Message from './Message/Message';
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { fieldIsRequired, maxLengthValid } from '../utilities/FormValidator';
+import { Textarea } from '../common/FormElements/FormElements';
 
+const maxLength = maxLengthValid(15);
 const Dialogs = (props) => {
 
     let dialogs = props.dialogsPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />);
@@ -31,7 +34,7 @@ const Dialogs = (props) => {
 const addMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div> <Field name={"message"} component={"textarea"}/></div>
+            <div> <Field name={"message"} component={Textarea} validate={[fieldIsRequired, maxLength]}/></div>
             <div><button>Send</button></div>
         </form>
     )

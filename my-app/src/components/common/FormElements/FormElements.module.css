@@ -1,0 +1,5 @@
+.spanError, .textError{
+    color: red;
+    border: 2px red solid;
+    padding: 10px;
+}
