@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import { headerAPI } from "../API/api";
 
 const SET_USER_LOGIN = 'ADD-SET_USER_LOGIN';
@@ -21,16 +22,34 @@ const authReducer = (state = initialState, action) => {
         default:
             return state;
     }
-}
+} 
 
 export const authUser = (data, loginned) => ({ type: SET_USER_LOGIN, data , loginned})
 
-export const getProfile = () => { 
+export const getProfile = (loginned = false) => { 
     return (dispatch) => {
         headerAPI.getProfile().then(data => {
-            let loginned = false; 
-            if (data.resultCode === 0) loginned = true; 
-            dispatch(authUser(data.data, loginned));
+            if (data.resultCode === 0) {
+                dispatch(authUser(data.data, loginned));
+            } 
+        });
+}}
+
+export const loginIn = (email, password, rememberMe) => { 
+    return (dispatch) => {
+        headerAPI.login(email, password, rememberMe).then(data => {
+            if (data.resultCode === 0) { 
+                dispatch(getProfile(true)); 
+            } else {
+                dispatch(stopSubmit("login", {_error: data.data.messages[0]}));
+            }
+        });
+}}
+
+export const loginOut = () => { 
+    return (dispatch) => {
+        headerAPI.logout().then(data => {
+            if (data.resultCode === 0) dispatch(getProfile());
         });
 }}
 
