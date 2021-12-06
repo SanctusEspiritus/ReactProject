@@ -38,7 +38,6 @@ export const setStatus = (status) => ({ type: SET_STATUS, status })
 
 export const getUserProfile = (userId) => {
     return (dispatch) => {
-        if (!userId) userId = 20687;
         userProfile.getUserProfile(userId).then(data => {
             dispatch(setUserProfile(data));
         });
