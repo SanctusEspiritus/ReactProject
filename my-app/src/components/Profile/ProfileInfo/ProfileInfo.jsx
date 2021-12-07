@@ -1,7 +1,7 @@
 import React from 'react';
 import Preloader from '../../common/Preloader/Preloader';
 import s from './ProfileInfo.module.css';
-import ProfileStatus from './ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatusWithHooks';
 
 const ProfileInfo = (props) => {
 
@@ -20,7 +20,7 @@ const ProfileInfo = (props) => {
             <div>
                 <p>Подписывайтесь на мой инстаграмм - {props.profile.contacts.instagram}</p>
             </div>
-            <ProfileStatus status={props.status} setUserStatus={props.setUserStatus}/>
+            <ProfileStatusWithHooks status={props.status} setUserStatus={props.setUserStatus}/>
         </div>
     </div>);
 }

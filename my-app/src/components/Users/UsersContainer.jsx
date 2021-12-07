@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { getUsers, setCurrentPage, followUser, unfollowUser } from '../../redux/users-reducer';
-import { getCurrentPage, getIsFetching, getPageSize, getTotalCount, getUsersArray, getUsersFollowing, getUsersState } from '../../redux/users-selectors';
+import { getCurrentPage, getIsFetching, getPageSize, getTotalCount, getUsersArraySelector, getUsersFollowing, getUsersState } from '../../redux/users-selectors';
 import Preloader from '../common/Preloader/Preloader';
 import { withAuthRedirect } from '../hoc/withAuthContainer';
 import Users from './Users';
@@ -45,7 +45,7 @@ class UsersContainer extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: getUsersArray(state),
+        users: getUsersArraySelector(state),
         pageSize: getPageSize(state),
         totalCount: getTotalCount(state),
         currentPage: getCurrentPage(state),
