@@ -7,34 +7,40 @@ import { Textarea } from '../../common/FormElements/FormElements';
 
 let maxLengthMessage = maxLengthValid(15);
 
-const MyPosts = (props) => {
+class MyPosts extends React.Component {
 
-    let posts = props.posts.map(post => <Post message={post.message} likesCount={post.likesCount} />);
-
-    let addPost = (data) => {
-        props.addPost(data.messagePost);
+    /* ничего не изменится, поскольку уже пофикшено разработчиками (написано чисто для практики) */
+    shouldComponentUpdate(prevProps, prevState) {
+        return prevProps != this.props || prevState != this.state;
     }
 
-    return (<div>
-        <h3>My posts</h3>
-        <div>
-            <AddMessagePostReduxForm onSubmit={addPost} />
-        </div>
-        <div className={s.posts}>
-            {posts}
-        </div>
-    </div>);
+    addPost = (data) => {
+        this.props.addPost(data.messagePost);
+    }
+
+    render() {
+        let posts = this.props.posts.map(post => <Post message={post.message} likesCount={post.likesCount} />);
+        return <div>
+            <h3>My posts</h3>
+            <div>
+                <AddMessagePostReduxForm onSubmit={this.addPost} />
+            </div>
+            <div className={s.posts}>
+                {posts}
+            </div>
+        </div>;
+    }
 }
 
 const addMessagePostForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <Field name={"messagePost"} component={Textarea} validate={[fieldIsRequired, maxLengthMessage]}/>
+            <Field name={"messagePost"} component={Textarea} validate={[fieldIsRequired, maxLengthMessage]} />
             <button>Add post</button>
         </form>
     )
 }
 
-const AddMessagePostReduxForm = reduxForm({form: "addMessageFormPostProfile"})(addMessagePostForm);
+const AddMessagePostReduxForm = reduxForm({ form: "addMessageFormPostProfile" })(addMessagePostForm);
 
 export default MyPosts;
